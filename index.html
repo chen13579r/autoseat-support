@@ -58,6 +58,12 @@
             align-items: center;
         }
 
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
         .logo {
             font-size: 1.5rem;
             font-weight: 700;
@@ -299,6 +305,20 @@
             .container {
                 padding: 5rem 1rem 2rem;
             }
+
+            .lang-switcher {
+                gap: 0.25rem;
+            }
+
+            .lang-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.85rem;
+            }
+
+            .disclaimer {
+                padding: 1rem;
+                font-size: 0.9rem;
+            }
         }
 
         /* 滚动动画 */
@@ -368,6 +388,55 @@
         .contact-method:hover {
             transform: translateY(-2px);
         }
+
+        /* 语言切换按钮 */
+        .lang-switcher {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .lang-btn {
+            padding: 0.5rem 1rem;
+            background: var(--surface-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .lang-btn:hover {
+            background: var(--surface);
+            color: var(--text-primary);
+        }
+
+        .lang-btn.active {
+            background: var(--accent);
+            color: var(--text-primary);
+            border-color: var(--accent);
+        }
+
+        /* 页面性质声明 */
+        .disclaimer {
+            background: rgba(255, 149, 0, 0.1);
+            border: 2px solid var(--warning);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: var(--text-primary);
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .disclaimer strong {
+            color: var(--warning);
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
     </style>
 </head>
 <body>
@@ -375,13 +444,19 @@
     <nav class="navbar">
         <div class="nav-container">
             <a href="#" class="logo">AutoSeat</a>
-            <ul class="nav-links">
-                <li><a href="#features">功能介绍</a></li>
-                <li><a href="#guide">使用指南</a></li>
-                <li><a href="#faq">常见问题</a></li>
-                <li><a href="#contact">联系我们</a></li>
-                <li><a href="#privacy">隐私政策</a></li>
-            </ul>
+            <div class="nav-right">
+                <ul class="nav-links">
+                    <li><a href="#features" data-i18n="nav.features">功能介绍</a></li>
+                    <li><a href="#guide" data-i18n="nav.guide">使用指南</a></li>
+                    <li><a href="#faq" data-i18n="nav.faq">常见问题</a></li>
+                    <li><a href="#contact" data-i18n="nav.contact">联系我们</a></li>
+                    <li><a href="#privacy" data-i18n="nav.privacy">隐私政策</a></li>
+                </ul>
+                <div class="lang-switcher">
+                    <button class="lang-btn active" data-lang="zh">中文</button>
+                    <button class="lang-btn" data-lang="en">English</button>
+                </div>
+            </div>
         </div>
     </nav>
 
@@ -391,18 +466,26 @@
         <section class="hero fade-in-up">
             <div class="hero-content">
                 <h1>AutoSeat</h1>
-                <p>智能宴席座位安排助手 - 让每一次宴席，都井然有序</p>
+                <p data-i18n="hero.subtitle">智能宴席座位安排助手 - 让每一次宴席，都井然有序</p>
+            </div>
+        </section>
+
+        <!-- 页面性质声明 -->
+        <section class="disclaimer fade-in-up">
+            <strong data-i18n="disclaimer.title">⚠️ 重要声明</strong>
+            <div data-i18n="disclaimer.content">
+                本应用为完全离线运行的本地工具，不提供任何互联网信息服务。本页面仅用于提供技术支持与使用说明。
             </div>
         </section>
 
         <!-- 应用介绍 -->
         <section class="card fade-in-up">
-            <h2>📱 关于 AutoSeat</h2>
-            <p>
+            <h2 data-i18n="about.title">📱 关于 AutoSeat</h2>
+            <p data-i18n="about.p1">
                 AutoSeat 是一款专业的宴席座位安排应用，帮助您轻松管理宾客信息、智能安排座位。
                 无论您是举办婚宴、生日宴、商务宴请还是企业活动，AutoSeat 都能让座位安排变得简单高效。
             </p>
-            <p>
+            <p data-i18n="about.p2">
                 应用采用优雅的深色主题设计，界面简洁直观，操作流畅自然。通过智能算法和直观的拖拽操作，
                 您可以快速完成座位安排，确保每一位宾客都能获得最佳的宴席体验。
             </p>
@@ -410,7 +493,7 @@
 
         <!-- 核心功能 -->
         <section id="features" class="card fade-in-up">
-            <h2>🎯 核心功能</h2>
+            <h2 data-i18n="features.title">🎯 核心功能</h2>
             
             <h3>🤖 AI 智能排位</h3>
             <p>一键自动安排座位，智能算法自动考虑以下因素：</p>
@@ -887,16 +970,102 @@
         <!-- 页脚 -->
         <footer style="text-align: center; padding: 2rem 0; color: var(--text-tertiary);">
             <p>© 2025 AutoSeat. All rights reserved.</p>
-            <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;" data-i18n="footer.tagline">
                 让每一次宴席，都井然有序
             </p>
             <p style="margin-top: 1rem; font-size: 0.85rem;">
-                <a href="#privacy" style="color: var(--text-tertiary);">隐私政策</a>
+                <a href="#privacy" style="color: var(--text-tertiary);" data-i18n="footer.privacy">隐私政策</a>
             </p>
         </footer>
     </div>
 
     <script>
+        // 多语言内容 - 完整翻译
+        const i18n = {
+            zh: {
+                'disclaimer.title': '⚠️ 重要声明',
+                'disclaimer.content': '本应用为完全离线运行的本地工具，不提供任何互联网信息服务。本页面仅用于提供技术支持与使用说明。',
+                'nav.features': '功能介绍',
+                'nav.guide': '使用指南',
+                'nav.faq': '常见问题',
+                'nav.contact': '联系我们',
+                'nav.privacy': '隐私政策',
+                'hero.subtitle': '智能宴席座位安排助手 - 让每一次宴席，都井然有序',
+                'about.title': '📱 关于 AutoSeat',
+                'about.p1': 'AutoSeat 是一款专业的宴席座位安排应用，帮助您轻松管理宾客信息、智能安排座位。无论您是举办婚宴、生日宴、商务宴请还是企业活动，AutoSeat 都能让座位安排变得简单高效。',
+                'about.p2': '应用采用优雅的深色主题设计，界面简洁直观，操作流畅自然。通过智能算法和直观的拖拽操作，您可以快速完成座位安排，确保每一位宾客都能获得最佳的宴席体验。',
+                'features.title': '🎯 核心功能',
+                'footer.tagline': '让每一次宴席，都井然有序',
+                'footer.privacy': '隐私政策',
+            },
+            en: {
+                'disclaimer.title': '⚠️ Important Notice',
+                'disclaimer.content': 'This application is a completely offline local tool that does not provide any internet information services. This page is only for providing technical support and usage instructions.',
+                'nav.features': 'Features',
+                'nav.guide': 'Guide',
+                'nav.faq': 'FAQ',
+                'nav.contact': 'Contact',
+                'nav.privacy': 'Privacy Policy',
+                'hero.subtitle': 'Smart Banquet Seating Assistant - Make Every Event Well-Organized',
+                'about.title': '📱 About AutoSeat',
+                'about.p1': 'AutoSeat is a professional banquet seating arrangement app that helps you easily manage guest information and intelligently arrange seats. Whether you are hosting a wedding, birthday party, business banquet, or corporate event, AutoSeat makes seating arrangements simple and efficient.',
+                'about.p2': 'The app features an elegant dark theme design with a clean, intuitive interface and smooth, natural operation. Through intelligent algorithms and intuitive drag-and-drop operations, you can quickly complete seating arrangements, ensuring every guest gets the best banquet experience.',
+                'features.title': '🎯 Core Features',
+                'footer.tagline': 'Make Every Event Well-Organized',
+                'footer.privacy': 'Privacy Policy',
+            }
+        };
+
+        // 当前语言
+        let currentLang = localStorage.getItem('lang') || 'zh';
+        document.documentElement.lang = currentLang;
+
+        // 初始化语言
+        function initLang() {
+            updateLangButtons();
+            // 更新所有有data-i18n属性的元素
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (i18n[currentLang] && i18n[currentLang][key]) {
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.value = i18n[currentLang][key];
+                    } else {
+                        el.textContent = i18n[currentLang][key];
+                    }
+                }
+            });
+        }
+
+        // 更新语言按钮状态
+        function updateLangButtons() {
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                if (btn.getAttribute('data-lang') === currentLang) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+
+        // 语言切换
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                currentLang = btn.getAttribute('data-lang');
+                localStorage.setItem('lang', currentLang);
+                document.documentElement.lang = currentLang;
+                initLang();
+                // 切换语言时滚动到顶部
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+
+        // 立即初始化（脚本在body末尾，DOM已加载）
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initLang);
+        } else {
+            initLang();
+        }
+
         // 平滑滚动
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
