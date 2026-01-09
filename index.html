@@ -37,14 +37,6 @@
             overflow-x: hidden;
         }
 
-        /* 渐变叠加效果 */
-        .gradient-overlay {
-            background: linear-gradient(to bottom, 
-                rgba(0, 0, 0, 0) 0%, 
-                rgba(0, 0, 0, 0.3) 50%, 
-                rgba(0, 0, 0, 0.7) 100%);
-        }
-
         /* 导航栏 */
         .navbar {
             position: fixed;
@@ -198,99 +190,100 @@
             margin-right: 0.75rem;
         }
 
-        /* 统计卡片 */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .stat-card {
+        /* Q&A 样式 */
+        .qa-item {
             background: var(--surface-secondary);
-            border-radius: 16px;
+            border-radius: 12px;
             padding: 1.5rem;
-            text-align: center;
+            margin-bottom: 1rem;
             border: 1px solid var(--border);
         }
 
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
+        .qa-question {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .qa-question::before {
+            content: 'Q:';
             color: var(--accent);
+            margin-right: 0.5rem;
+            font-weight: 700;
+        }
+
+        .qa-answer {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .qa-answer::before {
+            content: 'A:';
+            color: var(--success);
+            font-weight: 700;
+            margin-right: 0.5rem;
+        }
+
+        /* 步骤列表 */
+        .step-list {
+            list-style: none;
+            padding: 0;
+            counter-reset: step-counter;
+        }
+
+        .step-list li {
+            counter-increment: step-counter;
+            padding: 1rem 0 1rem 3rem;
+            position: relative;
+            color: var(--text-secondary);
             margin-bottom: 0.5rem;
         }
 
-        .stat-label {
-            color: var(--text-secondary);
+        .step-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 1rem;
+            width: 2rem;
+            height: 2rem;
+            background: var(--accent);
+            color: var(--text-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
             font-size: 0.9rem;
         }
 
-        /* 代码块 */
-        .code-block {
-            background: var(--bg-secondary);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin: 1rem 0;
-            border: 1px solid var(--border);
-            overflow-x: auto;
-        }
-
-        .code-block code {
-            color: var(--text-primary);
-            font-family: 'SF Mono', 'Monaco', 'Courier New', monospace;
-            font-size: 0.9rem;
-        }
-
-        /* 标签 */
-        .badge {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 12px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            margin: 0.25rem;
-        }
-
-        .badge-success {
-            background: rgba(52, 199, 89, 0.2);
-            color: var(--success);
-        }
-
-        .badge-warning {
-            background: rgba(255, 149, 0, 0.2);
-            color: var(--warning);
-        }
-
-        .badge-info {
-            background: rgba(59, 130, 246, 0.2);
-            color: var(--accent);
-        }
-
-        /* 表格 */
-        .table-container {
-            overflow-x: auto;
+        /* 提示框 */
+        .tip-box {
+            background: rgba(59, 130, 246, 0.1);
+            border-left: 4px solid var(--accent);
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
             margin: 1rem 0;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
+        .tip-box::before {
+            content: '💡';
+            margin-right: 0.5rem;
         }
 
-        th, td {
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid var(--border);
+        .warning-box {
+            background: rgba(255, 149, 0, 0.1);
+            border-left: 4px solid var(--warning);
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
         }
 
-        th {
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-
-        td {
-            color: var(--text-secondary);
+        .warning-box::before {
+            content: '⚠️';
+            margin-right: 0.5rem;
         }
 
         /* 响应式设计 */
@@ -305,10 +298,6 @@
 
             .container {
                 padding: 5rem 1rem 2rem;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
             }
         }
 
@@ -345,6 +334,40 @@
             background: var(--border);
             margin: 3rem 0;
         }
+
+        /* 联系卡片 */
+        .contact-card {
+            background: var(--surface);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .contact-card h3 {
+            margin-bottom: 1rem;
+        }
+
+        .contact-methods {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .contact-method {
+            padding: 1rem 2rem;
+            background: var(--surface-secondary);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: transform 0.3s ease;
+        }
+
+        .contact-method:hover {
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body>
@@ -353,10 +376,10 @@
         <div class="nav-container">
             <a href="#" class="logo">AutoSeat</a>
             <ul class="nav-links">
-                <li><a href="#features">功能特性</a></li>
-                <li><a href="#architecture">技术架构</a></li>
-                <li><a href="#stats">项目统计</a></li>
-                <li><a href="#support">技术支持</a></li>
+                <li><a href="#features">功能介绍</a></li>
+                <li><a href="#guide">使用指南</a></li>
+                <li><a href="#faq">常见问题</a></li>
+                <li><a href="#contact">联系我们</a></li>
             </ul>
         </div>
     </nav>
@@ -371,320 +394,310 @@
             </div>
         </section>
 
-        <!-- 项目介绍 -->
+        <!-- 应用介绍 -->
         <section class="card fade-in-up">
-            <h2>📱 项目介绍</h2>
+            <h2>📱 关于 AutoSeat</h2>
             <p>
                 AutoSeat 是一款专业的宴席座位安排应用，帮助您轻松管理宾客信息、智能安排座位。
-                采用先进的 AI 算法，一键自动安排座位，考虑关系约束、标签信息和容量限制。
-                支持全局宾客库管理，一次录入，多次使用，所有宴席共享宾客数据。
+                无论您是举办婚宴、生日宴、商务宴请还是企业活动，AutoSeat 都能让座位安排变得简单高效。
             </p>
             <p>
-                应用采用 <strong>Apple Invites 风格</strong>设计，深色主题、大图片背景、渐变叠加、现代简约的卡片式设计，
-                提供优雅的用户体验。
+                应用采用优雅的深色主题设计，界面简洁直观，操作流畅自然。通过智能算法和直观的拖拽操作，
+                您可以快速完成座位安排，确保每一位宾客都能获得最佳的宴席体验。
             </p>
         </section>
 
-        <!-- 功能特性 -->
+        <!-- 核心功能 -->
         <section id="features" class="card fade-in-up">
             <h2>🎯 核心功能</h2>
             
             <h3>🤖 AI 智能排位</h3>
+            <p>一键自动安排座位，智能算法自动考虑以下因素：</p>
             <ul class="feature-list">
-                <li>一键自动安排座位，考虑关系约束和标签信息</li>
-                <li>智能算法自动检测容量限制，避免超限</li>
-                <li>支持手动拖拽调整，灵活满足个性化需求</li>
-                <li>实时冲突检测，避免错误安排</li>
+                <li>强制同桌关系（必须安排在同一桌的宾客）</li>
+                <li>强制不同桌关系（不能安排在同一桌的宾客）</li>
+                <li>标签信息（同标签的宾客倾向于安排在同一桌）</li>
+                <li>桌子容量限制（自动检测并避免超限）</li>
             </ul>
+            <div class="tip-box">
+                点击"自动排位"按钮，几秒钟即可完成座位安排，节省大量时间！
+            </div>
 
             <h3>👥 全局宾客库</h3>
+            <p>建立您的宾客库，一次录入，多次使用：</p>
             <ul class="feature-list">
-                <li>一次录入，所有宴席共享使用</li>
-                <li>修改一次，所有宴席自动更新</li>
-                <li>显示使用计数，清晰了解宾客使用情况</li>
-                <li>支持通讯录导入，批量添加宾客</li>
+                <li>所有宴席共享宾客数据，无需重复录入</li>
+                <li>修改一次宾客信息，所有相关宴席自动更新</li>
+                <li>清晰显示宾客被哪些宴席使用</li>
+                <li>支持从通讯录批量导入，告别手动录入</li>
+            </ul>
+
+            <h3>🤝 关系约束管理</h3>
+            <p>灵活设置宾客关系，确保座位安排符合社交需求：</p>
+            <ul class="feature-list">
+                <li>设置强制同桌关系（如：夫妻、家人必须坐一起）</li>
+                <li>设置强制不同桌关系（如：有矛盾的宾客不能坐一起）</li>
+                <li>关系属于宾客资料，所有宴席自动使用</li>
+                <li>智能排位时自动考虑所有关系约束</li>
+            </ul>
+
+            <h3>🖱️ 拖拽手动排位</h3>
+            <p>直观的拖拽操作，灵活调整座位安排：</p>
+            <ul class="feature-list">
+                <li>可视化显示所有桌子和宾客</li>
+                <li>拖拽宾客到桌子，轻松分配座位</li>
+                <li>实时冲突检测，避免错误安排</li>
+                <li>支持撤销/重做操作，随时调整</li>
             </ul>
 
             <h3>⚠️ 实时冲突检测</h3>
+            <p>智能检测系统，确保座位安排正确无误：</p>
             <ul class="feature-list">
-                <li>自动检测容量超限、关系约束冲突</li>
-                <li>详细的冲突报告和解决建议</li>
+                <li>自动检测桌子容量超限</li>
+                <li>检测关系约束冲突（强制同桌未满足、强制不同桌冲突）</li>
+                <li>显示详细的冲突报告和解决建议</li>
                 <li>拖拽操作时实时提示，避免错误安排</li>
             </ul>
 
-            <h3>🖱️ 拖拽排位</h3>
+            <h3>🏷️ 标签分类管理</h3>
+            <p>为宾客添加标签，便于分类和管理：</p>
             <ul class="feature-list">
-                <li>可视化显示所有桌子</li>
-                <li>拖拽宾客到桌子，轻松调整</li>
-                <li>实时冲突检测和高亮</li>
-                <li>支持撤销/重做操作</li>
+                <li>为宾客添加多个标签（如：家人、朋友、同事）</li>
+                <li>标签颜色标识，便于识别</li>
+                <li>支持按标签筛选宾客</li>
+                <li>智能排位时考虑标签信息</li>
             </ul>
 
             <h3>☁️ iCloud 同步</h3>
+            <p>数据自动同步，多设备无缝切换：</p>
             <ul class="feature-list">
-                <li>数据在所有设备间自动同步</li>
-                <li>支持 iPhone、iPad、Mac 多设备</li>
+                <li>数据在所有设备间自动同步（iPhone、iPad、Mac）</li>
+                <li>无需手动操作，后台自动同步</li>
                 <li>随时随地访问最新数据</li>
+                <li>使用 Apple 官方 CloudKit 服务，安全可靠</li>
             </ul>
 
-            <h3>📤 数据导出</h3>
+            <h3>📤 数据导出分享</h3>
+            <p>方便地导出和分享座位安排信息：</p>
             <ul class="feature-list">
-                <li>导出 CSV 格式的宾客名单和座位安排表</li>
-                <li>方便分享和打印，现场使用更便捷</li>
+                <li>导出 CSV 格式的宾客名单</li>
+                <li>导出 CSV 格式的座位安排表</li>
+                <li>支持分享到其他应用</li>
+                <li>方便打印，现场使用更便捷</li>
             </ul>
         </section>
 
-        <!-- 技术架构 -->
-        <section id="architecture" class="card fade-in-up">
-            <h2>🏗️ 技术架构</h2>
+        <!-- 使用指南 -->
+        <section id="guide" class="card fade-in-up">
+            <h2>📖 使用指南</h2>
             
-            <h3>开发阶段</h3>
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>阶段</th>
-                            <th>状态</th>
-                            <th>说明</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>阶段一：基础架构层</td>
-                            <td><span class="badge badge-success">✅ 完成</span></td>
-                            <td>数据模型、数据持久化、基础服务</td>
-                        </tr>
-                        <tr>
-                            <td>阶段二：基础UI组件层</td>
-                            <td><span class="badge badge-success">✅ 完成</span></td>
-                            <td>可复用的基础UI组件</td>
-                        </tr>
-                        <tr>
-                            <td>阶段三：数据展示组件层</td>
-                            <td><span class="badge badge-success">✅ 完成</span></td>
-                            <td>数据展示相关的组件</td>
-                        </tr>
-                        <tr>
-                            <td>阶段四：核心业务功能层</td>
-                            <td><span class="badge badge-success">✅ 完成</span></td>
-                            <td>核心业务功能页面和逻辑</td>
-                        </tr>
-                        <tr>
-                            <td>阶段五：高级功能层</td>
-                            <td><span class="badge badge-warning">⏳ 进行中</span></td>
-                            <td>增强功能和高级特性（60%完成）</td>
-                        </tr>
-                        <tr>
-                            <td>阶段六：优化和测试</td>
-                            <td><span class="badge badge-info">📋 待开始</span></td>
-                            <td>性能优化、测试和bug修复</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            <h3>快速开始</h3>
+            <ol class="step-list">
+                <li>
+                    <strong>创建宴席</strong><br>
+                    点击"+"按钮创建新宴席，输入宴席名称、日期、地点等信息，可选择添加封面图片。
+                </li>
+                <li>
+                    <strong>添加宾客</strong><br>
+                    在宴席详情中，点击"添加宾客"按钮。您可以选择：
+                    <ul style="margin-top: 0.5rem; padding-left: 1.5rem; list-style: disc;">
+                        <li>从宾客库选择已有宾客</li>
+                        <li>手动添加新宾客（自动添加到宾客库）</li>
+                        <li>从通讯录批量导入</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>设置桌子</strong><br>
+                    在"桌子"标签页中，创建桌子并设置每张桌子的容量（人数）。
+                </li>
+                <li>
+                    <strong>安排座位</strong><br>
+                    点击"自动排位"按钮，系统会自动安排所有宾客的座位。您也可以进入"手动排位"页面，通过拖拽方式调整座位。
+                </li>
+                <li>
+                    <strong>导出分享</strong><br>
+                    座位安排完成后，可以导出 CSV 格式的座位安排表，方便分享和打印。
+                </li>
+            </ol>
 
-            <h3>技术栈</h3>
+            <h3>宾客库管理</h3>
+            <p>宾客库是全局共享的宾客主数据源，建议您：</p>
             <ul class="feature-list">
-                <li><strong>开发语言</strong>：Swift</li>
-                <li><strong>UI框架</strong>：SwiftUI</li>
-                <li><strong>数据持久化</strong>：SwiftData</li>
-                <li><strong>云同步</strong>：CloudKit (iCloud)</li>
-                <li><strong>设计风格</strong>：Apple Invites 风格</li>
+                <li>首次使用时，先建立宾客库，添加常用宾客信息</li>
+                <li>从通讯录批量导入，快速建立宾客库</li>
+                <li>为宾客添加标签，便于分类和管理</li>
+                <li>在宾客详情中设置关系约束，确保座位安排合理</li>
             </ul>
 
-            <h3>架构设计</h3>
-            <div class="code-block">
-                <code>
-基础数据（全局共享）<br>
-└── 宾客库（所有宾客的主数据）<br>
-&nbsp;&nbsp;&nbsp;&nbsp;├── 宾客基本信息（姓名、电话、邮箱等）<br>
-&nbsp;&nbsp;&nbsp;&nbsp;└── 宾客关系（宾客之间的关系约束）<br>
-<br>
-宴会数据（每个宴会独立）<br>
-├── 宴会基本信息（名称、日期、地点等）<br>
-├── 宴会宾客（从宾客库中选择）<br>
-├── 宴会关系（复用宾客资料中的关系）<br>
-└── 桌子（属于特定宴会）
-                </code>
+            <h3>关系约束设置</h3>
+            <p>在宾客详情页面，您可以设置该宾客与其他宾客的关系：</p>
+            <ul class="feature-list">
+                <li><strong>强制同桌</strong>：必须安排在同一桌（如：夫妻、家人）</li>
+                <li><strong>强制不同桌</strong>：不能安排在同一桌（如：有矛盾的宾客）</li>
+            </ul>
+            <div class="tip-box">
+                关系约束会在所有宴席中生效，设置一次即可在所有宴席中使用。
+            </div>
+
+            <h3>智能排位技巧</h3>
+            <ul class="feature-list">
+                <li>确保所有宾客都已添加到宴席中</li>
+                <li>设置好所有桌子和容量</li>
+                <li>设置好关系约束（如有需要）</li>
+                <li>为宾客添加标签，帮助智能排位</li>
+                <li>排位完成后，检查冲突报告，如有冲突可手动调整</li>
+            </ul>
+
+            <h3>手动排位操作</h3>
+            <ol class="step-list">
+                <li>进入"手动排位"页面</li>
+                <li>查看所有桌子和未分配的宾客</li>
+                <li>拖拽宾客卡片到目标桌子</li>
+                <li>系统会实时检测冲突，如有冲突会高亮提示</li>
+                <li>可以随时撤销/重做操作</li>
+            </ol>
+        </section>
+
+        <!-- 常见问题 -->
+        <section id="faq" class="card fade-in-up">
+            <h2>❓ 常见问题</h2>
+
+            <div class="qa-item">
+                <div class="qa-question">如何添加宾客到宴席？</div>
+                <div class="qa-answer">
+                    有三种方式：1) 从宾客库选择已有宾客；2) 手动添加新宾客（会自动添加到宾客库）；3) 从通讯录批量导入。
+                    在宴席详情页面的"宾客"标签中，点击"添加宾客"按钮即可选择添加方式。
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="qa-question">宾客库和宴席宾客有什么区别？</div>
+                <div class="qa-answer">
+                    宾客库是全局共享的宾客主数据源，所有宴席都可以从中选择宾客。宴席宾客是从宾客库中选择并添加到特定宴席的宾客。
+                    修改宾客库中的宾客信息后，所有使用该宾客的宴席会自动更新。
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="qa-question">如何设置关系约束？</div>
+                <div class="qa-answer">
+                    在宾客详情页面，找到"关系管理"部分，点击"添加关系"按钮。选择关联宾客和关系类型（强制同桌或强制不同桌），
+                    设置完成后，智能排位时会自动考虑这些约束。
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="qa-question">自动排位后出现冲突怎么办？</div>
+                <div class="qa-answer">
+                    如果出现冲突，系统会显示详细的冲突报告。您可以：
+                    1) 调整桌子容量；2) 修改关系约束；3) 进入手动排位页面，手动调整座位安排。
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="qa-question">如何导出座位安排表？</div>
+                <div class="qa-answer">
+                    在宴席详情页面，点击右上角的菜单按钮，选择"导出"。您可以选择导出宾客名单或座位安排表，
+                    导出为 CSV 格式，方便分享和打印。
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="qa-question">数据会同步到其他设备吗？</div>
+                <div class="qa-answer">
+                    是的，如果您启用了 iCloud 同步，数据会在所有登录了相同 iCloud 账户的设备间自动同步。
+                    在设置页面可以查看同步状态和手动触发同步。
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="qa-question">删除宾客会影响宴席吗？</div>
+                <div class="qa-answer">
+                    删除宾客库中的宾客时，系统会提示您影响范围（会被从哪些宴席中移除）。确认删除后，
+                    该宾客会从所有相关宴席中移除，但不会影响其他宾客和宴席数据。
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="qa-question">如何为宾客添加标签？</div>
+                <div class="qa-answer">
+                    在宾客详情页面，找到"标签"部分，点击"添加标签"按钮。您可以选择已有标签或创建新标签，
+                    一个宾客可以有多个标签。
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="qa-question">智能排位的算法是如何工作的？</div>
+                <div class="qa-answer">
+                    智能排位算法会按优先级处理：1) 优先处理强制同桌的宾客；2) 处理强制不同桌的约束；
+                    3) 考虑标签信息，同标签的宾客倾向于安排在同一桌；4) 考虑桌子容量限制。
+                    算法会尽量满足所有约束，如果无法满足，会生成冲突报告。
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="qa-question">可以同时管理多个宴席吗？</div>
+                <div class="qa-answer">
+                    可以！AutoSeat 支持同时管理多个宴席。每个宴席都有独立的宾客列表和桌子配置，
+                    但共享同一个宾客库。您可以在宴席列表页面查看和管理所有宴席。
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="qa-question">如何修改桌子的容量？</div>
+                <div class="qa-answer">
+                    在桌子详情页面，点击"编辑"按钮可以修改桌子容量。注意：容量不能小于已分配的宾客数量。
+                    如果当前已分配的宾客数超过新容量，需要先移除部分宾客。
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="qa-question">应用支持哪些设备？</div>
+                <div class="qa-answer">
+                    AutoSeat 支持 iPhone 和 iPad，需要 iOS 17.0 或更高版本。通过 iCloud 同步，
+                    您可以在多个设备间无缝切换使用。
+                </div>
             </div>
         </section>
 
-        <!-- 项目统计 -->
-        <section id="stats" class="card fade-in-up">
-            <h2>📊 项目统计</h2>
-            
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-number">81</div>
-                    <div class="stat-label">Swift 代码文件</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">24,767</div>
-                    <div class="stat-label">总代码行数</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">19</div>
-                    <div class="stat-label">文档文件</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">9,382</div>
-                    <div class="stat-label">文档行数</div>
-                </div>
-            </div>
-
-            <h3>模块代码分布</h3>
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>模块</th>
-                            <th>文件数</th>
-                            <th>代码行数</th>
-                            <th>占比</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Views</td>
-                            <td>25</td>
-                            <td>10,919</td>
-                            <td>44.1%</td>
-                        </tr>
-                        <tr>
-                            <td>Components</td>
-                            <td>28</td>
-                            <td>5,307</td>
-                            <td>21.4%</td>
-                        </tr>
-                        <tr>
-                            <td>Services</td>
-                            <td>5</td>
-                            <td>5,145</td>
-                            <td>20.8%</td>
-                        </tr>
-                        <tr>
-                            <td>Data</td>
-                            <td>8</td>
-                            <td>1,871</td>
-                            <td>7.6%</td>
-                        </tr>
-                        <tr>
-                            <td>Models</td>
-                            <td>7</td>
-                            <td>493</td>
-                            <td>2.0%</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <h3>项目成熟度</h3>
-            <ul class="feature-list">
-                <li><strong>基础架构</strong>：100% 完成</li>
-                <li><strong>核心功能</strong>：95% 完成</li>
-                <li><strong>UI 组件</strong>：100% 完成</li>
-                <li><strong>数据层</strong>：100% 完成</li>
-                <li><strong>高级功能</strong>：60% 完成</li>
-                <li><strong>测试</strong>：0% 完成</li>
-                <li><strong>文档</strong>：80% 完成</li>
-            </ul>
-            <p style="margin-top: 1rem;"><strong>总体完成度：约 75%</strong></p>
-        </section>
-
-        <!-- 设计风格 -->
+        <!-- 适用场景 -->
         <section class="card fade-in-up">
-            <h2>🎨 设计风格</h2>
-            <p>
-                AutoSeat 采用 <strong>Apple Invites 风格</strong>作为统一的视觉设计风格，提供优雅的用户体验。
-            </p>
-            
-            <h3>核心设计特征</h3>
+            <h2>🎉 适用场景</h2>
+            <p>AutoSeat 适用于各种宴席场景：</p>
             <ul class="feature-list">
-                <li><strong>深色主题</strong>：深色背景（纯黑/接近黑色），白色文本</li>
-                <li><strong>大图片背景</strong>：事件卡片使用大尺寸背景图片作为主要视觉元素</li>
-                <li><strong>渐变叠加</strong>：在背景图片上使用半透明渐变叠加，增强文本可读性</li>
-                <li><strong>卡片式设计</strong>：圆角卡片（16-20px），带有微妙的阴影和深度感</li>
-                <li><strong>现代简约</strong>：干净、不杂乱的设计，聚焦内容</li>
-            </ul>
-
-            <h3>颜色主题</h3>
-            <div class="code-block">
-                <code>
-背景色：纯黑 (#000000) / 次要背景 (#0A0A0A)<br>
-表面色：深灰 (#1C1C1E) / 次要表面 (#2C2C2E)<br>
-文本色：白色 / 浅灰 (#AEAEB2) / 更浅的灰 (#6E6E73)<br>
-状态颜色：绿色 (#34C759) / 灰色 (#8E8E93) / 橙色 (#FF9500) / 黄色 (#FFD60A)
-                </code>
-            </div>
-        </section>
-
-        <!-- 功能完成度 -->
-        <section class="card fade-in-up">
-            <h2>✅ 功能完成度</h2>
-            
-            <h3>核心功能（P0）</h3>
-            <ul class="feature-list">
-                <li>✅ 宴席管理（基础功能）</li>
-                <li>✅ 宾客库管理（基础宾客库）</li>
-                <li>✅ 宴会宾客管理（从宾客库选择或添加新宾客）</li>
-                <li>✅ 宾客关系管理（关系是宾客资料的一部分）</li>
-                <li>✅ 桌子管理（完整功能）</li>
-                <li>✅ 座位安排（手动和自动）</li>
-                <li>✅ 设置管理（基础功能）</li>
-            </ul>
-
-            <h3>重要功能（P1）</h3>
-            <ul class="feature-list">
-                <li>✅ 导入导出（CSV）</li>
-                <li>✅ 标签管理</li>
-                <li>✅ iCloud 同步</li>
-                <li>✅ 冲突检测和提示</li>
-                <li>⏳ JPEG 导出（预留接口）</li>
-            </ul>
-
-            <h3>增强功能（P2）</h3>
-            <ul class="feature-list">
-                <li>⏳ 座位布局可视化</li>
-                <li>⏳ 桌子配置（TableConfigView）</li>
-                <li>⏳ 备份功能</li>
-                <li>⏳ 外观设置</li>
-                <li>⏳ 打印功能</li>
+                <li><strong>婚宴</strong>：安排宾客座位，考虑亲友关系，确保重要宾客坐在一起</li>
+                <li><strong>生日宴</strong>：管理宾客信息，智能排位，让聚会更有序</li>
+                <li><strong>商务宴请</strong>：合理安排座位，提升商务体验</li>
+                <li><strong>企业活动</strong>：批量管理宾客，快速安排座位，导出座位表</li>
+                <li><strong>聚会活动</strong>：轻松管理大量宾客，智能排位，节省时间</li>
             </ul>
         </section>
 
-        <!-- 技术支持 -->
-        <section id="support" class="card fade-in-up">
-            <h2>💬 技术支持</h2>
+        <!-- 联系我们 -->
+        <section id="contact" class="card fade-in-up">
+            <h2>💬 联系我们</h2>
             <p>
                 如果您在使用 AutoSeat 过程中遇到任何问题，或有任何建议和反馈，欢迎通过以下方式联系我们：
             </p>
-            <ul class="feature-list">
-                <li><strong>GitHub Issues</strong>：提交问题报告和功能请求</li>
-                <li><strong>应用内反馈</strong>：在设置页面使用反馈功能</li>
-                <li><strong>邮件支持</strong>：通过应用内反馈页面获取联系方式</li>
-            </ul>
-        </section>
-
-        <!-- 更新日志 -->
-        <section class="card fade-in-up">
-            <h2>📝 更新日志</h2>
             
-            <h3>版本 2.0 - 重大更新</h3>
-            <p><strong>完全重构，全新体验！</strong></p>
-            
-            <h4>✨ 全新功能</h4>
-            <ul class="feature-list">
-                <li>全局宾客库管理 - 所有宴席共享宾客数据，一次录入多次使用</li>
-                <li>数据导出功能 - 导出 CSV 格式的宾客名单和座位安排表</li>
-                <li>iCloud 同步 - 数据在所有设备间自动同步</li>
-            </ul>
+            <div class="contact-methods">
+                <div class="contact-method">
+                    <strong>应用内反馈</strong><br>
+                    <span style="color: var(--text-secondary); font-size: 0.9rem;">
+                        在应用的"设置"页面使用反馈功能
+                    </span>
+                </div>
+                <div class="contact-method">
+                    <strong>技术支持</strong><br>
+                    <span style="color: var(--text-secondary); font-size: 0.9rem;">
+                        通过应用内反馈页面获取联系方式
+                    </span>
+                </div>
+            </div>
 
-            <h4>🔧 重大改进</h4>
-            <ul class="feature-list">
-                <li>完全重构 - 全新架构，性能更优，体验更流畅</li>
-                <li>智能排位优化 - 算法更智能，速度更快</li>
-                <li>界面优化 - Apple Invites 风格设计，更优雅美观</li>
-            </ul>
+            <div class="tip-box" style="margin-top: 2rem;">
+                我们非常重视您的反馈，会认真对待每一个建议和问题报告。感谢您使用 AutoSeat！
+            </div>
         </section>
 
         <div class="divider"></div>
