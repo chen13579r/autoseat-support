@@ -474,7 +474,8 @@
         <section class="disclaimer fade-in-up">
             <strong data-i18n="disclaimer.title">⚠️ 重要声明</strong>
             <div data-i18n="disclaimer.content">
-                本应用为完全离线运行的本地工具，不提供任何互联网信息服务。本页面仅用于提供技术支持与使用说明。
+                本应用核心功能可在无网络环境下使用，不提供在线内容发布、用户互动、或基于服务器的功能服务。
+                网络仅用于 Apple 提供的系统级 iCloud 同步（可由用户关闭）。本页面仅用于提供技术支持与使用说明。
             </div>
         </section>
 
@@ -495,8 +496,8 @@
         <section id="features" class="card fade-in-up">
             <h2 data-i18n="features.title">🎯 核心功能</h2>
             
-            <h3>🤖 AI 智能排位</h3>
-            <p>一键自动安排座位，智能算法自动考虑以下因素：</p>
+            <h3>🤖 智能自动排位</h3>
+            <p>一键自动安排座位，基于规则和约束条件的自动排位算法，综合考虑以下因素：</p>
             <ul class="feature-list">
                 <li>强制同桌关系（必须安排在同一桌的宾客）</li>
                 <li>强制不同桌关系（不能安排在同一桌的宾客）</li>
@@ -833,7 +834,7 @@
                     同步到您的其他设备（iPhone、iPad、Mac）。同步仅在您的 Apple ID 账户下的设备间进行
                 </li>
                 <li>
-                    <strong>数据加密</strong>：iCloud 同步使用 Apple 的端到端加密技术，确保数据传输和存储的安全
+                    <strong>数据加密</strong>：iCloud 同步通过 Apple 官方 CloudKit 服务完成，数据在传输和存储过程中由 Apple 按其安全机制进行保护
                 </li>
             </ul>
             <div class="warning-box">
@@ -879,7 +880,7 @@
             <p>我们采取以下措施保护您的数据安全：</p>
             <ul class="feature-list">
                 <li>所有数据存储在您的设备本地，由您完全控制</li>
-                <li>iCloud 同步使用 Apple 的端到端加密技术</li>
+                <li>iCloud 同步通过 Apple 官方 CloudKit 服务完成，数据在传输和存储过程中由 Apple 按其安全机制进行保护</li>
                 <li>应用遵循 Apple 的安全最佳实践</li>
                 <li>不会在网络上传输未加密的数据</li>
             </ul>
@@ -984,7 +985,7 @@
         const i18n = {
             zh: {
                 'disclaimer.title': '⚠️ 重要声明',
-                'disclaimer.content': '本应用为完全离线运行的本地工具，不提供任何互联网信息服务。本页面仅用于提供技术支持与使用说明。',
+                'disclaimer.content': '本应用核心功能可在无网络环境下使用，不提供在线内容发布、用户互动、或基于服务器的功能服务。网络仅用于 Apple 提供的系统级 iCloud 同步（可由用户关闭）。本页面仅用于提供技术支持与使用说明。',
                 'nav.features': '功能介绍',
                 'nav.guide': '使用指南',
                 'nav.faq': '常见问题',
@@ -1000,7 +1001,7 @@
             },
             en: {
                 'disclaimer.title': '⚠️ Important Notice',
-                'disclaimer.content': 'This application is a completely offline local tool that does not provide any internet information services. This page is only for providing technical support and usage instructions.',
+                'disclaimer.content': 'The core features of this application can be used without network connectivity. It does not provide online content publishing, user interaction, or server-based functional services. Network is only used for Apple\'s system-level iCloud sync (can be disabled by users). This page is only for providing technical support and usage instructions.',
                 'nav.features': 'Features',
                 'nav.guide': 'Guide',
                 'nav.faq': 'FAQ',
